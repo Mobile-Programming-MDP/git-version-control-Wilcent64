@@ -1,0 +1,63 @@
+// void main() {
+// //   final myFuture = Future((){ //Uncompleted
+// //     print('Creating the future');
+// //     return 12;
+// //   }).then((value){            //Completed with data
+// //     print(value);
+// //   }).catchError((error){      //Completed with error
+// //     print('error $error');
+// //   });
+// //   print('main() done');
+// //   //print(myFuture); -> tidak bisa
+  
+  
+//   getOrder().then((value){        //Completed with data
+//     print('You ordered : $value');
+//   }).catchError((error){          //Completed with error
+//     print('error $error');
+//   }).whenComplete((){             //Sama seperti finally
+//     print('Thank You');
+//   });
+//   print('Getting your order...');
+// }
+
+// Future<String> getOrder(){
+//   return Future.delayed(Duration(seconds: 3), (){
+//     var isStockAvaible = true;
+//     if(isStockAvaible){
+//       return 'Coffee Boba';
+//     }else{
+//       throw 'Out of Stock';
+//     }
+//   });
+// }
+
+
+
+
+////////////////////////////////////////////
+
+
+void main() async{
+  print('Getting your order...');
+  var order = await getOrder();
+  try{
+    print('Your Order : $order');   //Complete with data
+  } catch(error){
+    print('error $error');          //Complete with error
+  } finally{
+    print('Thank You');
+  }
+}
+
+Future<String> getOrder(){
+  return Future.delayed(Duration(seconds: 3), (){
+    var isStockAvaible = true;
+    if(isStockAvaible){
+      return 'Coffee Boba';
+    }else{
+      throw 'Out of Stock';
+    }
+  });
+}
+
